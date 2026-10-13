@@ -145,8 +145,7 @@ All generated files are under `output/`.
 
 | Output | Location |
 | --- | --- |
-| SAM3.1 candidate masks and overlays | `output/SAM3SegResults/candidates/` |
-| Selected target masks and overlays | `output/SAM3SegResults/targetTreeMasks/` and `output/SAM3SegResults/targetTreeOverlays/` |
+| SAM3.1 selected masks and overlays | `output/SAM3SegResults/targetTreeMasks/` and `targetTreeOverlays/` |
+| SAM3.1 segmentation processing time per image (CPU/GPU, seconds) | `output/SAM3SegResults/reports/timings_<run_id>.csv` |
 | Four DBH result CSVs (cm) | `output/DBHResults/SAM3/` and `output/DBHResults/MobileSAMv2/` |
-| MobileSAMv2 masks and overlays | `output/DBHResults/MobileSAMv2/masks/` |
 | Final plots (PNG/PDF) and statistics (CSV) | **`output/visualization/`** |
