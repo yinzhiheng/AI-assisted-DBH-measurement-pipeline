@@ -1,6 +1,6 @@
-# AI-assisted DBH measurement pipeline
+# AI-assisted diameter-at-breast-height (DBH) measurement pipeline
 
-SAM3.1 and MobileSAMv2 tree-diameter measurement on the natural and plotted datasets.
+SAM3.1 and MobileSAMv2 tree DBH measurement on the natural and plotted datasets.
 
 ## 1. Folder structure
 
