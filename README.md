@@ -17,12 +17,11 @@ AI-assisted-DBH-measurement-pipeline/
 ```
 
 Raw data, MobileSAMv2 models and required C++ libraries are included.
-Download the SAM3.1 checkpoint separately as described below. Environments,
-caches, build outputs and previous results are not included.
+Download the SAM3.1 checkpoint separately as described below.
 
 ## 2. Install and check the environment
 
-Use Windows 10/11 x64 with internet access. Open **PowerShell** in the repository
+Use Windows 10/11 x64 with internet access. Open **PowerShell** in this repository
 root and run these commands in order. The scripts install Python automatically;
 for GPU use, install a CUDA 12.6-compatible NVIDIA driver first.
 
@@ -55,13 +54,7 @@ $Device = 'cpu'   # Change to 'cu126' for NVIDIA GPU
 ```
 
 Each stage must report `PASS` before continuing. Accept administrator prompts if
-needed; if a restart is requested, restart and repeat that stage. Append
-`-CheckOnly` to recheck a stage. Logs and test outputs are in `output/setup/`.
-See [environment/README.md](environment/README.md) for versions and troubleshooting.
-
-Optional: to install the separate environment and re-export MobileSAMv2 ONNX models,
-run `.\environment\Setup-Windows.cmd -Environment export`. Normal pipeline runs
-use the bundled ONNX models and do not need this step.
+needed; if a restart is requested, restart and repeat that stage. The installation might take over 10 mins.
 
 ## 3. Run each dataset
 
@@ -69,34 +62,58 @@ From the repository root, set the device to match your installation and choose
 how many examples to process from the raw data:
 
 ```powershell
-$Device = 'cpu'   # Or 'cu126', matching the installation above
+$Device = 'cpu'  
 $Python = ".\.venvs\sam31-$Device\Scripts\python.exe"
 $SamDevice = if ($Device -eq 'cpu') { 'cpu' } else { 'cuda:0' }
 $Data = 'data'
 $MaxFiles = 10   # First 10 examples per dataset; use 0 for all 285 natural / 202 plotted
 ```
 
-To switch between a sample and all data, change `$MaxFiles`, rerun both blocks
-below, then rerun visualization. Matching result CSVs are replaced. No separate
-copy of test data is needed. Keep `$Data = 'data'`, not `data/rawdata`.
+To switch between a sample and all data, only change `$MaxFiles`, rerun both blocks
+below, then rerun visualization.
 
-**Natural dataset — both SAM3.1 and MobileSAMv2:**
+- **SAM3.1 requires two commands:** segmentation first, then DBH calculation.
+- **MobileSAMv2 requires one command:** its DBH program performs segmentation internally.
+
+### Case 1: SAM3.1 — Natural dataset
+
+**Step 1: Run segmentation and target-tree selection.**
 
 ```powershell
 & $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset natural --data-dir $Data --device $SamDevice --limit $MaxFiles
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method all -Dataset natural -DataDir $Data -MaxFiles $MaxFiles -SaveMasks
 ```
 
-**Plotted dataset — both SAM3.1 and MobileSAMv2:**
+**Step 2: After Step 1 finishes successfully, run DBH calculation.**
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset natural -DataDir $Data -MaxFiles $MaxFiles
+```
+
+### Case 2: SAM3.1 — Plotted dataset
+
+**Step 1: Run segmentation and target-tree selection.**
 
 ```powershell
 & $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset plotted --data-dir $Data --device $SamDevice --limit $MaxFiles
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method all -Dataset plotted -DataDir $Data -MaxFiles $MaxFiles -SaveMasks
 ```
 
-For each dataset, let segmentation and automatic target selection finish
-successfully before running DBH measurement. `-Method all` runs both methods;
-MobileSAMv2 performs its own segmentation on CPU. The `SAM3` output name means SAM3.1.
+**Step 2: After Step 1 finishes successfully, run DBH calculation.**
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset plotted -DataDir $Data -MaxFiles $MaxFiles
+```
+
+### Case 3: MobileSAMv2 — Natural dataset
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset natural -DataDir $Data -MaxFiles $MaxFiles -SaveMasks
+```
+
+### Case 4: MobileSAMv2 — Plotted dataset
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset plotted -DataDir $Data -MaxFiles $MaxFiles -SaveMasks
+```
 
 ## 4. Visualization and output locations
 
