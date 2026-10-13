@@ -13,7 +13,7 @@ AI-assisted-DBH-measurement-pipeline/
 ├── model/                Model source, checkpoints and MobileSAMv2 ONNX models
 ├── environment/          Installation scripts and dependencies
 ├── output/               Created when running: masks, DBH results, figures and logs
-└── visualization/        Evaluation notebook
+└── visualization/        Generated figures used in the paper
 ```
 
 Raw data, MobileSAMv2 models and required C++ libraries are included.
