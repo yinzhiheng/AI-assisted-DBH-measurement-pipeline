@@ -99,6 +99,19 @@ For the original project, the destination is `DBH-pipeline-whole/output/SAM3SegR
 
 ## 4. Run the four pipelines locally
 
+From the repository root, set the device to match your installation and choose
+how many examples to process from the raw data:
+
+```powershell
+$Device = 'cpu'   # Or 'cu126', matching the installation above
+$Python = ".\.venvs\sam31-$Device\Scripts\python.exe"
+$SamDevice = if ($Device -eq 'cpu') { 'cpu' } else { 'cuda:0' }
+$Data = 'data'
+$MaxFiles = 10   # First 10 examples per dataset; use 0 for all 285 natural / 202 plotted
+```
+
+To switch between a sample and all data, only change `$MaxFiles`.
+
 **For SAM3.1, skip the first command if you copied that dataset's GPU masks
 from Colab.** Otherwise, run both commands in order. Use the same `$MaxFiles`
 as segmentation.
