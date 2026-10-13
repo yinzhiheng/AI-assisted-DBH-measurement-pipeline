@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "batchProcessPlotDatasetByMobileSAMv2", "batchProcessing\batchProcessPlotDatasetByMobileSAMv2.vcxproj", "{98C6A175-1543-4DDD-B887-01C36F42BEF6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "batchProcessNaturalDatasetByMobileSAMv2", "batchProcessing\batchProcessNaturalDatasetByMobileSAMv2.vcxproj", "{AE0A577B-C301-49B6-A74F-618AA7CD6FB0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "batchProcessPlotDatasetBySAM3", "batchProcessing\batchProcessPlotDatasetBySAM3.vcxproj", "{81F97DD7-019C-4717-9ABD-ADCC5AFD7A18}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "batchProcessNaturalDatasetBySAM3", "batchProcessing\batchProcessNaturalDatasetBySAM3.vcxproj", "{C7C4F637-E92A-495C-8068-96B6B3EC5408}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98C6A175-1543-4DDD-B887-01C36F42BEF6}.Release|x64.ActiveCfg = Release|x64
+		{98C6A175-1543-4DDD-B887-01C36F42BEF6}.Release|x64.Build.0 = Release|x64
+		{AE0A577B-C301-49B6-A74F-618AA7CD6FB0}.Release|x64.ActiveCfg = Release|x64
+		{AE0A577B-C301-49B6-A74F-618AA7CD6FB0}.Release|x64.Build.0 = Release|x64
+		{81F97DD7-019C-4717-9ABD-ADCC5AFD7A18}.Release|x64.ActiveCfg = Release|x64
+		{81F97DD7-019C-4717-9ABD-ADCC5AFD7A18}.Release|x64.Build.0 = Release|x64
+		{C7C4F637-E92A-495C-8068-96B6B3EC5408}.Release|x64.ActiveCfg = Release|x64
+		{C7C4F637-E92A-495C-8068-96B6B3EC5408}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+EndGlobal

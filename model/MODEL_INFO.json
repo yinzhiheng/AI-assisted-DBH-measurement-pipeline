@@ -1,0 +1,42 @@
+{
+  "sam31": {
+    "implementation": "Existing locally adapted SAM31 single-image detector",
+    "checkpoint": "SAM31/checkpoints/sam3.1_multiplex.pt",
+    "upstream": "https://github.com/facebookresearch/sam3",
+    "checkpoint_source": "https://huggingface.co/facebook/sam3.1"
+  },
+  "mobilesamv2": {
+    "implementation": "MobileSAMv2 TinyViT and separate PromptGuidedDecoder",
+    "prompt": "external box",
+    "multimask_output": true,
+    "upstream": "https://github.com/ChaoningZhang/MobileSAM",
+    "note": "Generation name describes implementation; it does not imply newly trained weights."
+  },
+  "files": [
+    {
+      "path": "MobileSAMv2\\checkpoints\\mobile_sam.pt",
+      "bytes": 40728226,
+      "sha256": "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
+    },
+    {
+      "path": "MobileSAMv2\\checkpoints\\Prompt_guided_Mask_Decoder.pt",
+      "bytes": 16310784,
+      "sha256": "8771b38a57ad67750dbe18fff95e66c8d1789436096738cace37d58bfc06151e"
+    },
+    {
+      "path": "MobileSAMv2\\onnx\\mobile_sam.onnx",
+      "bytes": 16511562,
+      "sha256": "318f77e3b0c100e9e070f04d1789a966a7f4ab8c74dc05f650e5a75e1b24f1f9"
+    },
+    {
+      "path": "MobileSAMv2\\onnx\\mobile_sam_preprocess.onnx",
+      "bytes": 28194128,
+      "sha256": "62dd325618b7e49f0a5013059ebf3ee83ff82dafa81a7b83713b732692e15658"
+    },
+    {
+      "path": "SAM31\\checkpoints\\sam3.1_multiplex.pt",
+      "bytes": 3502755717,
+      "sha256": "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6"
+    }
+  ]
+}

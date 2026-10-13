@@ -1,0 +1,22 @@
+# Download SAM3.1 separately; this checkpoint exceeds GitHub's file-size limit.
+/model/SAM31/checkpoints/*.pt
+
+# Raw data, MobileSAMv2 models and bundled C++ libraries are tracked.
+# Environments, caches and results are created only when setup/pipelines run.
+output/
+codes/DBH/build/
+environment/python/**/local_dependencies/
+__pycache__/
+*.pyc
+.vs/
+.ipynb_checkpoints/
+*.user
+*.suo
+
+# Recreate these per computer with environment/Setup-Windows.ps1.
+.venvs/
+environment/.tools/
+environment/.cache/
+environment/.setup-logs/
+data/rawdata_test/
+visualization/outputs/

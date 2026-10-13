@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Use the bundled libraries even on hosts with global vcpkg integration. -->
+    <VcpkgEnabled>false</VcpkgEnabled>
+    <VcpkgApplocalDeps>false</VcpkgApplocalDeps>
+    <PipelineRoot>$(MSBuildThisFileDirectory)..\..\</PipelineRoot>
+    <SourceRoot>$(PipelineRoot)codes\DBH\src</SourceRoot>
+    <OpenCVRoot>$(MSBuildThisFileDirectory)opencv</OpenCVRoot>
+    <OnnxRuntimeRoot>$(MSBuildThisFileDirectory)onnxruntime</OnnxRuntimeRoot>
+    <OutDir>$(PipelineRoot)codes\DBH\build\$(Configuration)\</OutDir>
+    <IntDir>$(PipelineRoot)codes\DBH\build\obj\$(Configuration)\$(ProjectName)\</IntDir>
+    <LocalDebuggerWorkingDirectory>$(PipelineRoot)</LocalDebuggerWorkingDirectory>
+    <LocalDebuggerCommand>$(TargetPath)</LocalDebuggerCommand>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SourceRoot)\BatchProcessing;$(SourceRoot)\configs;$(SourceRoot)\Load;$(SourceRoot)\CameraModel;$(SourceRoot)\DepthFrame;$(SourceRoot)\BreastHeightLocalizer;$(SourceRoot)\DBHMeasurer;$(SourceRoot)\SegmentationModel;$(OnnxRuntimeRoot)\include;$(OpenCVRoot)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>NOMINMAX;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(OnnxRuntimeRoot)\lib;$(OpenCVRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world4110.lib;onnxruntime.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Target Name="CopyRuntimeLibraries" AfterTargets="Build">
+    <ItemGroup>
+      <RuntimeLibrary Include="$(OpenCVRoot)\bin\opencv_world4110.dll" />
+      <RuntimeLibrary Include="$(OnnxRuntimeRoot)\lib\onnxruntime.dll" />
+      <RuntimeLibrary Include="$(OnnxRuntimeRoot)\lib\onnxruntime_providers_shared.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(RuntimeLibrary)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

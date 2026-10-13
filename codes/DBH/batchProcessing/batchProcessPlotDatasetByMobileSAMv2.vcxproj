@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{98C6A175-1543-4DDD-B887-01C36F42BEF6}</ProjectGuid>
+    <RootNamespace>batchProcessPlotDatasetByMobileSAMv2</RootNamespace>
+    <ProjectName>batchProcessPlotDatasetByMobileSAMv2</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="$(ProjectDir)..\..\..\environment\cpp\Dependencies.props" />
+  <PropertyGroup>
+    <TargetName>$(ProjectName)</TargetName>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <!-- One batch entry point per executable; shared code stays in codes/src. -->
+    <ClCompile Include="batchProcessPlotDatasetByMobileSAMv2.cpp" />
+    <ClCompile Include="..\src\BatchProcessing\BatchInput.cpp" />
+    <ClCompile Include="..\src\BreastHeightLocalizer\BreastHeightLocalizer.cpp" />
+    <ClCompile Include="..\src\CameraModel\CameraModel.cpp" />
+    <ClCompile Include="..\src\configs\configs.cpp" />
+    <ClCompile Include="..\src\DBHMeasurer\DBHMeasurer.cpp" />
+    <ClCompile Include="..\src\DepthFrame\DepthFrame.cpp" />
+    <ClCompile Include="..\src\Load\load.cpp" />
+    <ClCompile Include="..\src\SegmentationModel\sam.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

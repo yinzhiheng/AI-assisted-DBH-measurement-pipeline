@@ -1,0 +1,15 @@
+# Optional: only required to export PyTorch to ONNX, not to run C++.
+# Python 3.10, isolated from the SAM3.1 environment.
+# The separate Torch stage installs PyTorch 2.5.1+cpu and torchvision 0.20.1+cpu.
+numpy==2.0.1
+Pillow==11.1.0
+timm==1.0.15
+opencv-python==4.11.0.86
+onnx==1.23.2
+onnxruntime==1.23.2
+flatbuffers==25.12.19
+# Imported by the bundled EfficientViT modules when mobilesamv2 is imported,
+# even when exporting only the TinyViT model. Required when importing the bundled source.
+torchpack==0.3.1
+onnxsim==0.7.3
+setuptools==81.0.0

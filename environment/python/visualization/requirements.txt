@@ -1,0 +1,6 @@
+# Python 3.13, installed alongside the SAM31 requirements.
+matplotlib==3.10.8
+pandas==3.0.1
+ipython==9.7.0
+jupyterlab==4.5.3
+ipykernel==6.30.1

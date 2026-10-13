@@ -1,0 +1,4 @@
+# CPU-only selection dependencies. Install SAM3/PyTorch separately on the cloud GPU.
+# NumPy's upper bound matches the official SAM3 package requirement.
+numpy>=1.26,<2
+Pillow>=10.1
