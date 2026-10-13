@@ -22,8 +22,7 @@ Download the SAM3.1 checkpoint separately as described below.
 ## 2. Install and check the environment
 
 Use Windows 10/11 x64 with internet access. Open **PowerShell** in this repository
-root and run these commands in order. The scripts install Python automatically;
-for GPU use, install a CUDA 12.6-compatible NVIDIA driver first.
+root and run these commands in order. 
 
 **Download SAM3.1 first:** sign in and request model access at
 [facebook/sam3.1](https://huggingface.co/facebook/sam3.1), then download
@@ -56,66 +55,83 @@ $Device = 'cpu'   # Change to 'cu126' for NVIDIA GPU
 Each stage must report `PASS` before continuing. Accept administrator prompts if
 needed; if a restart is requested, restart and repeat that stage. The installation might take over 10 mins.
 
-## 3. Run each dataset
+## 3. Generate SAM3.1 masks on Colab GPU (optional)
 
-From the repository root, set the device to match your installation and choose
-how many examples to process from the raw data:
+For GPU masks, follow this section. CPU segmentation commands are in Step 4.
 
-```powershell
-$Device = 'cpu'  
-$Python = ".\.venvs\sam31-$Device\Scripts\python.exe"
-$SamDevice = if ($Device -eq 'cpu') { 'cpu' } else { 'cuda:0' }
-$Data = 'data'
-$MaxFiles = 10   # First 10 examples per dataset; use 0 for all 285 natural / 202 plotted
+Upload these files to **My Drive**:
+
+```text
+My Drive/                              # /content/drive/MyDrive/
+└── DBH-pipeline-whole-repo-clean/
+    ├── codes/segmentation/
+    │   ├── batchProcess_SAM31_GPU.ipynb
+    │   ├── batchProcess_SAM31_CPU.py
+    │   └── selectTargetTree_SAM31.py
+    ├── environment/python/sam31_gpu/
+    │   └── requirements.txt
+    ├── model/SAM31/
+    │   ├── source/                    # Copy the entire source folder
+    │   └── checkpoints/sam3.1_multiplex.pt
+    ├── data/
+    │   ├── rawdata/
+    │   │   ├── rgb_naturalField/      # .jpeg images
+    │   │   └── rgb_plottedField/      # .jpeg images
+    │   ├── basePoints_natural.csv
+    │   └── basePoints_plotted.csv
+    └── output/SAM3SegResults/         # Created by the notebook
 ```
 
-To switch between a sample and all data, only change `$MaxFiles`, rerun both blocks
-below, then rerun visualization.
+The checkpoint is excluded from GitHub; upload it from your local copy.
 
-- **SAM3.1 requires two commands:** segmentation first, then DBH calculation.
-- **MobileSAMv2 requires one command:** its DBH program performs segmentation internally.
+1. Open [batchProcess_SAM31_GPU.ipynb](codes/segmentation/batchProcess_SAM31_GPU.ipynb)
+   in Colab and select a **GPU runtime**.
+2. In the first cell, `PROJECT_ROOT` must point to
+   **`/content/drive/MyDrive/DBH-pipeline-whole-repo-clean`**. Run the mount and
+   installation cells. If NumPy changes, restart the session and rerun the mount cell.
+3. Set `DATASET` to `'natural'`, `'plotted'`, or `'all'`, and set
+   `LIMIT_PER_DATASET` to match `$MaxFiles`.
 
-### Case 1: SAM3.1 — Natural dataset
+**Bring results back to local computer:** copy the entire Drive `output/SAM3SegResults/` folder
+to the same path in your local DBH project, then continue to Step 4.
+For the original project, the destination is `DBH-pipeline-whole/output/SAM3SegResults/`. 
 
-**Step 1: Run segmentation and target-tree selection.**
 
-```powershell
-& $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset natural --data-dir $Data --device $SamDevice --limit $MaxFiles
-```
+## 4. Run the four pipelines locally
 
-**Step 2: After Step 1 finishes successfully, run DBH calculation.**
+**For SAM3.1, skip the first command if you copied that dataset's GPU masks
+from Colab.** Otherwise, run both commands in order. Use the same `$MaxFiles`
+as segmentation.
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset natural -DataDir $Data -MaxFiles $MaxFiles
-```
-
-### Case 2: SAM3.1 — Plotted dataset
-
-**Step 1: Run segmentation and target-tree selection.**
-
-```powershell
-& $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset plotted --data-dir $Data --device $SamDevice --limit $MaxFiles
-```
-
-**Step 2: After Step 1 finishes successfully, run DBH calculation.**
+**1. Natural dataset — SAM3.1**
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset plotted -DataDir $Data -MaxFiles $MaxFiles
+& $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset natural --device cpu --limit $MaxFiles
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset natural -MaxFiles $MaxFiles
 ```
 
-### Case 3: MobileSAMv2 — Natural dataset
+**2. Plotted dataset — SAM3.1**
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset natural -DataDir $Data -MaxFiles $MaxFiles -SaveMasks
+& $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset plotted --device cpu --limit $MaxFiles
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset plotted -MaxFiles $MaxFiles
 ```
 
-### Case 4: MobileSAMv2 — Plotted dataset
+**3. Natural dataset — MobileSAMv2**
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset plotted -DataDir $Data -MaxFiles $MaxFiles -SaveMasks
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset natural -MaxFiles $MaxFiles -SaveMasks
 ```
 
-## 4. Visualization and output locations
+**4. Plotted dataset — MobileSAMv2**
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset plotted -MaxFiles $MaxFiles -SaveMasks
+```
+
+## 5. Visualization and output locations
 
 After both datasets finish, open the notebook in the same PowerShell window:
 
@@ -123,10 +139,9 @@ After both datasets finish, open the notebook in the same PowerShell window:
 & $Python -B -X utf8 -m jupyterlab .\visualization\fusedSAM_visualization_clean.ipynb
 ```
 
-Choose **Kernel → Restart Kernel and Run All Cells** to generate scatter plots,
-error plots, MobileSAMv2 growth-direction plots and summary statistics.
+Choose **Kernel → Restart Kernel and Run All Cells** to generate all statistical analysis plots.
 
-All generated files are under `output/`; `data/` contains inputs only.
+All generated files are under `output/`.
 
 | Output | Location |
 | --- | --- |
