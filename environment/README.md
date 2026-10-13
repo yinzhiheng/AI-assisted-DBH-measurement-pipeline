@@ -18,12 +18,6 @@ Checks may run models and generate files under `output/setup/<run>/`.
 | Visualization | [Pinned requirements](python/visualization/requirements.txt), installed during `Packages` |
 | Optional ONNX export | Separate Python 3.10; PyTorch 2.5.1+cpu / torchvision 0.20.1+cpu; [supporting packages](python/mobilesamv2_export/requirements.txt) |
 
-The Torch stage selects a matched pair from the [official PyTorch indexes](https://pytorch.org/get-started/previous-versions/).
-The Packages stage constrains that exact pair and checks it again after installing
-other dependencies. CUDA wheel installation does not install the NVIDIA driver;
-see [NVIDIA compatibility guidance](https://docs.nvidia.com/deploy/cuda-compatibility/minor-version-compatibility.html).
-An installed CUDA toolkit alone does not establish that GPU execution works.
-
 ## Script categories
 
 | `-Stage` | Implementation | Independent check |
