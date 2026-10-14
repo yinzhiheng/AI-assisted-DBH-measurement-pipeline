@@ -17,21 +17,15 @@ AI-assisted-DBH-measurement-pipeline/
 ```
 
 Raw data, MobileSAMv2 models and required C++ libraries are included.
-Download the SAM3.1 checkpoint separately as described below.
+Download the SAM3.1 checkpoint separately as described in the folder ./model/SAM31/checkpoints.
 
 ## 2. Install and check the environment
 
 Use Windows 10/11 x64 with internet access. Open **PowerShell** in this repository
 root and run these commands in order. 
 
-**Download SAM3.1 first:** sign in and request model access at
-[facebook/sam3.1](https://huggingface.co/facebook/sam3.1), then download
-`sam3.1_multiplex.pt` into `model/SAM31/checkpoints/`. This 3.26 GiB file is too
-large for ordinary GitHub storage. See the [checkpoint instructions](model/SAM31/checkpoints/README.md)
-for the exact path and checksum.
-
 ```powershell
-$Device = 'cpu'   # Change to 'cu126' for NVIDIA GPU
+$Device = 'cpu' 
 
 # Microsoft C++ runtime, compiler and Windows SDK
 .\environment\Setup-Windows.cmd -Stage System -Device $Device -InstallSystemPrerequisites
@@ -57,13 +51,13 @@ needed; if a restart is requested, restart and repeat that stage. The installati
 
 ## 3. Generate SAM3.1 masks on Colab GPU (optional)
 
-For GPU masks, follow this section. CPU segmentation commands are in Step 4.
+For generating tree mask using SAM3.1 via GPU, follow this section. CPU segmentation commands are in Step 4.
 
-Upload these files to **My Drive**:
+Upload files below to **My Drive**; for simplicity, you could directly upload the whole repo AI-assisted-DBH-measurement pipeline:
 
 ```text
 My Drive/                              # /content/drive/MyDrive/
-└── DBH-pipeline-whole-repo-clean/
+└── AI-assisted-DBH-measurement/
     ├── codes/segmentation/
     │   ├── batchProcess_SAM31_GPU.ipynb
     │   ├── batchProcess_SAM31_CPU.py
@@ -71,19 +65,19 @@ My Drive/                              # /content/drive/MyDrive/
     ├── environment/python/sam31_gpu/
     │   └── requirements.txt
     ├── model/SAM31/
-    │   ├── source/                    # Copy the entire source folder
+    │   ├── source/                   
     │   └── checkpoints/sam3.1_multiplex.pt
     ├── data/
     │   ├── rawdata/
-    │   │   ├── rgb_naturalField/      # .jpeg images
-    │   │   └── rgb_plottedField/      # .jpeg images
+    │   │   ├── rgb_naturalField/     
+    │   │   └── rgb_plottedField/     
     │   ├── basePoints_natural.csv
     │   └── basePoints_plotted.csv
-    └── output/SAM3SegResults/         # Created by the notebook
+    └── output/SAM3SegResults/         
 ```
 
-The checkpoint is excluded from GitHub; upload it from your local copy.
-
+The checkpoint in ./model/SAM31/checkpoints is excluded from GitHub; please download the checkpoint first as described in step1 and then upload it from your local copy.
+Then, you could generate masks on GPU by executing steps below in order:
 1. Open [batchProcess_SAM31_GPU.ipynb](codes/segmentation/batchProcess_SAM31_GPU.ipynb)
    in Colab and select a **GPU runtime**.
 2. In the first cell, `PROJECT_ROOT` must point to
@@ -91,11 +85,10 @@ The checkpoint is excluded from GitHub; upload it from your local copy.
    installation cells. If NumPy changes, restart the session and rerun the mount cell.
 3. Set `DATASET` to `'natural'`, `'plotted'`, or `'all'`, and set
    `LIMIT_PER_DATASET` to match `$MaxFiles`.
+4. Run every cell through the notebook.
 
-**Bring results back to local computer:** copy the entire Drive `output/SAM3SegResults/` folder
-to the same path in your local DBH project, then continue to Step 4.
-For the original project, the destination is `DBH-pipeline-whole/output/SAM3SegResults/`. 
-
+**Bring results back to local computer:** copy the entire Drive `output/SAM3SegResults` folder
+to your local computer and replace the folder at `AI-assisted-DBH-measurement/output/SAM3SegResults`, then continue to Step 4.
 
 ## 4. Run the four pipelines locally
 
@@ -103,7 +96,7 @@ From the repository root, set the device to match your installation and choose
 how many examples to process from the raw data:
 
 ```powershell
-$Device = 'cpu'   # Or 'cu126', matching the installation above
+$Device = 'cpu'  
 $Python = ".\.venvs\sam31-$Device\Scripts\python.exe"
 $SamDevice = if ($Device -eq 'cpu') { 'cpu' } else { 'cuda:0' }
 $Data = 'data'
@@ -112,9 +105,8 @@ $MaxFiles = 10   # First 10 examples per dataset; use 0 for all 285 natural / 20
 
 To switch between a sample and all data, only change `$MaxFiles`.
 
-**For SAM3.1, skip the first command if you copied that dataset's GPU masks
-from Colab.** Otherwise, run both commands in order. Use the same `$MaxFiles`
-as segmentation.
+**For SAM3.1 pipeline, skip the first command if you copied that dataset's GPU masks
+from Colab.** Otherwise, run both commands in order.
 
 **1. Natural dataset — SAM3.1**
 
@@ -146,7 +138,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.
 
 ## 5. Visualization and output locations
 
-After both datasets finish, open the notebook in the same PowerShell window:
+After four pipelines finish, open the notebook in the same PowerShell window:
 
 ```powershell
 & $Python -B -X utf8 -m jupyterlab .\visualization\fusedSAM_visualization_clean.ipynb
