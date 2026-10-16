@@ -35,10 +35,6 @@ $Device = 'cpu'
 # Build the four C++ measurement programs
 .\environment\Setup-Windows.cmd -Stage Cpp
 ```
-```
-# Check all four pipelines and visualization on one example per dataset
-.\environment\Setup-Windows.cmd -Stage Pipeline -Device $Device
-```
 
 Each stage must report `PASS` before continuing. Accept administrator prompts if
 needed; if a restart is requested, restart and repeat that stage. The installation might take over 10 mins.
