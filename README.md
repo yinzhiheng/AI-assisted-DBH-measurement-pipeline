@@ -44,9 +44,7 @@ needed; if a restart is requested, restart and repeat that stage. The installati
 CPU users can continue to Step 4.
 
 **Upload the whole project.** Open [Google Drive → My Drive](https://drive.google.com/drive/my-drive)
-using the same Google account as Colab. Name the uploaded
-folder **`AI-assisted-DBH-measurement-pipeline`**. Include the downloaded checkpoint
-at `model/SAM31/checkpoints/sam3.1_multiplex.pt`. Since the sam3.1_multiplex.pt is quite large, it might take around 1 hour to finish uploading the folder.
+using the same Google account as Colab, then upload the entire folder **`AI-assisted-DBH-measurement-pipeline-main`**. Before uploading, make sure the downloaded checkpoint is saved at `model/SAM31/checkpoints/sam3.1_multiplex.pt` inside the project folder. The project is approximately 4 GB, so uploading may take around an hour, depending on your internet upload speed.
 
 **Run the notebook.** Open
 [batchProcess_SAM31_GPU.ipynb](codes/segmentation/batchProcess_SAM31_GPU.ipynb)
@@ -54,7 +52,7 @@ in Colab, select a **GPU runtime**, and check these settings:
 
 | Setting | Value |
 | --- | --- |
-| `PROJECT_ROOT` | `/content/drive/MyDrive/AI-assisted-DBH-measurement-pipeline` |
+| `PROJECT_ROOT` | `/content/drive/MyDrive/AI-assisted-DBH-measurement-pipeline-main` |
 | `DATASET` | `'natural'`, `'plotted'`, or `'all'` |
 | `LIMIT_PER_DATASET` | Match local `$MaxFiles`: `10`, or `0` for all images |
 | `GPU_PRECISION` | `'float32'` |
@@ -68,8 +66,7 @@ then continue to Step 4.
 
 ## 4. Run the four pipelines locally
 
-From the repository root, set the device to match your installation and choose
-how many examples to process from the raw data:
+Open PowerShell in the repository root and set the following options. By default, the pipelines use the CPU and process the first 10 images per dataset.
 
 ```powershell
 $Device = 'cpu'  
