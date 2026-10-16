@@ -2,22 +2,10 @@
 
 SAM3.1 and MobileSAMv2 tree DBH measurement on the natural and plotted datasets.
 
-## 1. Folder structure
+## 1. SAM3.1 Model download
 
-```text
-AI-assisted-DBH-measurement-pipeline/
-├── data/                 Raw RGB/depth images, labels and base-point CSVs
-├── codes/
-│   ├── segmentation/     SAM3.1 segmentation and target-tree selection
-│   └── DBH/              C++ measurement code, build and run scripts
-├── model/                Model source, checkpoints and MobileSAMv2 ONNX models
-├── environment/          Installation scripts and dependencies
-├── output/               Created when running: masks, DBH results, figures and logs
-└── visualization/        Generated figures used in the paper
-```
-
-Raw data, MobileSAMv2 models and required C++ libraries are included.
-Download the SAM3.1 checkpoint separately as described in the folder ./model/SAM31/checkpoints.
+Please download the checkpoint from dropbox link here: https://www.dropbox.com/scl/fo/x5h4o6eyw9db6huogjgnj/AAT_fnW2s2rpvOSpKBBYExg?rlkey=00hno0ktgnu3dqwesi9s0iab1&st=ooxojppt&dl=0
+Once downloaded, please move sam3.1_multiplex.pt to the folder ./model/SAM31/checkpoints
 
 ## 2. Install and check the environment
 
