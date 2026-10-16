@@ -1,6 +1,6 @@
 # Environment
 
-Follow the [main README](../README.md#2-install-and-check-the-environment) for all
+Follow the [README](../README.md#2-install-and-check-the-environment) in main folder for all
 installation and pipeline commands.
 
 ## Requirements
