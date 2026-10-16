@@ -1,10 +1,7 @@
 # Environment
 
 Follow the [main README](../README.md#2-install-and-check-the-environment) for all
-installation and pipeline commands. Each installation category has its own script
-and can be rerun with `Setup-Windows.cmd -Stage <name>`. Every stage checks its own
-result; `-CheckOnly` repeats those checks without installing packages or rebuilding.
-Checks may run models and generate files under `output/setup/<run>/`.
+installation and pipeline commands.
 
 ## Requirements
 
@@ -29,44 +26,3 @@ Checks may run models and generate files under `output/setup/<run>/`.
 | `Cpp` | [05-Cpp.ps1](stages/05-Cpp.ps1) | Four EXEs, matching DLLs, real MobileSAMv2 measurements on both datasets |
 | `Pipeline` | [06-Pipeline.ps1](stages/06-Pipeline.ps1) | SAM3.1 inference/selection, all four DBH results and every visualization cell |
 | `Export` | [07-Export.ps1](stages/07-Export.ps1) | Actual ONNX export, graph validation and numerical agreement with PyTorch |
-
-Use the dispatcher rather than running these internal files directly; it supplies
-the paths, logs and selected environment. `stages/Common.ps1` provides shared
-installation helpers; `checks/check_python.py` implements the Python runtime checks.
-
-`-Profile Python` runs System, Python, Torch and Packages only. `-Profile Measurement`
-runs System and Cpp. `-Environment export` uses its own Python/Torch versions.
-`-IncludeExport` adds that separate sequence after the normal setup.
-`-Plan` prints the requested sequence without changing files.
-
-For a separate installation trial, pass the same `-VenvPath .venvs/<name>` to each
-Python-related stage. Existing environments with the wrong Python version are
-rejected rather than replaced. `-DataDir` selects the input root for runtime checks;
-its default is `data`. `Pipeline` uses one example per dataset by
-default; `-SampleCount 10` uses the first 10 raw examples per dataset. Checks do not overwrite
-regular DBH results or the bundled ONNX models. `Export -CheckOnly` tests the
-bundled pair, while normal `Export` tests the newly exported pair.
-
-## Locate a failure
-
-| Failure | What to inspect |
-| --- | --- |
-| `System` | Microsoft installer restart/errors, selected compiler workload, SDK or NVIDIA driver |
-| `Python` | Reported interpreter/version and incomplete environment folder |
-| `Torch` | Package download, exact CPU/CUDA build, native DLL loading or CUDA/NMS failure |
-| `Packages` | Missing/conflicting dependency, package version or model import traceback |
-| `Cpp` | MSBuild output, missing bundled DLL/models, or invalid measurement |
-| `Pipeline` | Segmentation/selection errors, GPU memory, measurement rows or notebook traceback; use a shorter project path if Windows rejects a long filename |
-| `Export` | Exporter traceback, ONNX graph/runtime errors or numerical mismatch |
-
-Each invocation writes `summary.json`; each attempted stage writes `stage.log`
-and `status.json`. The first failed stage stops an automatic sequence. Preserve
-that run folder when diagnosing another computer's installation.
-
-## Clean distribution
-
-Only installation scripts, requirements, checks and required C++ libraries are
-bundled here. Setup creates `.venvs/`, `environment/.tools/`, `environment/.cache/`
-and `output/setup/` when needed. C++ builds create `codes/DBH/build/`.
-No installed Python environments, download caches, previous logs or test results
-are included. Run the stages in the main README to install and check this copy.
