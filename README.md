@@ -14,22 +14,28 @@ root and run these commands in order.
 
 ```powershell
 $Device = 'cpu' 
-
+```
+```
 # Microsoft C++ runtime, compiler and Windows SDK
 .\environment\Setup-Windows.cmd -Stage System -Device $Device -InstallSystemPrerequisites
-
+```
+```
 # Python environment
 .\environment\Setup-Windows.cmd -Stage Python -Device $Device
-
+```
+```
 # PyTorch for SAM3.1, using the selected CPU/GPU
 .\environment\Setup-Windows.cmd -Stage Torch -Device $Device
-
+```
+```
 # SAM3.1 and visualization packages
 .\environment\Setup-Windows.cmd -Stage Packages -Device $Device
-
+```
+```
 # Build the four C++ measurement programs
 .\environment\Setup-Windows.cmd -Stage Cpp
-
+```
+```
 # Check all four pipelines and visualization on one example per dataset
 .\environment\Setup-Windows.cmd -Stage Pipeline -Device $Device
 ```
@@ -61,8 +67,8 @@ Choose **Runtime → Run all**. Allow Drive access when prompted. If installatio
 requires a session restart, restart and choose **Run all** again.
 
 **Continue locally.** Download the entire Drive project's
-`output/SAM3SegResults/` folder into **`<local-project>/output/SAM3SegResults/`**,
-where `<local-project>` is the folder used for DBH calculation. Continue to Step 4.
+`output/SAM3SegResults/` folder and replace the local folder at **`<local-project>/output/SAM3SegResults/`**,
+then continue to Step 4.
 
 ## 4. Run the four pipelines locally
 
@@ -86,7 +92,8 @@ from Colab.** Otherwise, run both commands in order.
 
 ```powershell
 & $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset natural --device cpu --limit $MaxFiles
-
+```
+```
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset natural -MaxFiles $MaxFiles
 ```
 
@@ -94,7 +101,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.
 
 ```powershell
 & $Python -B -X utf8 .\codes\segmentation\batchProcess_SAM31_CPU.py --dataset plotted --device cpu --limit $MaxFiles
-
+```
+```
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method SAM3 -Dataset plotted -MaxFiles $MaxFiles
 ```
 
