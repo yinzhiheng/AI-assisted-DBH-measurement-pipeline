@@ -9,8 +9,7 @@ Once downloaded, please move sam3.1_multiplex.pt to the folder ./model/SAM31/che
 
 ## 2. Install and check the environment
 
-Use Windows 10/11 x64 with internet access. Open **PowerShell** in this repository
-root `<local-project>/AI-assisted-DBH-measurement-pipeline-main` and run these commands in order. 
+Use Windows 10/11 x64 with internet access. Open **PowerShell** in `AI-assisted-DBH-measurement-pipeline-main`, the project root folder containing README.md and the codes, data, and environment folders. Then run these commands in order. 
 
 ```powershell
 $Device = 'cpu' 
@@ -61,7 +60,7 @@ Choose **Runtime → Run all**. Allow Drive access when prompted. If installatio
 requires a session restart, restart and choose **Run all** again.
 
 **Continue locally.** Download the entire Drive project's
-`output/SAM3SegResults/` folder and replace the local folder at **`<local-project>/AI-assisted-DBH-measurement-pipeline-main/output/SAM3SegResults/`**,
+`output/SAM3SegResults/` folder and replace the local folder at **`<local-path>/AI-assisted-DBH-measurement-pipeline-main/output/SAM3SegResults/`**,
 then continue to Step 4.
 
 ## 4. Run the four pipelines locally
