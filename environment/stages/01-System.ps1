@@ -6,12 +6,22 @@ function Invoke-SystemStage([hashtable]$Context) {
     }
     Write-Host 'PASS: Microsoft VC++ x64 runtime.'
     if ($Context.WithCpp) {
-        if (!(Get-BuildTools) -or !(Test-WindowsSdk)) {
-            if ($Context.CheckOnly -or !$Context.InstallSystemPrerequisites) { throw 'VS 2022 C++ tools or Windows SDK missing. Run System with -InstallSystemPrerequisites.' }
-            Install-MicrosoftPackage $Context 'https://aka.ms/vs/17/release/vs_BuildTools.exe' 'vs_BuildTools.exe' '--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended'
-            if (!(Get-BuildTools) -or !(Test-WindowsSdk)) { throw 'VS 2022 tools/Windows SDK are still missing.' }
+        $msbuild = Get-BuildTools
+        $sdk = Get-WindowsSdk
+        if (!$msbuild -or !$sdk) {
+            if (!$msbuild) { Write-Host 'Missing: VS 2022 MSBuild and MSVC v143 x64 compiler/libraries.' }
+            if (!$sdk) { Write-Host 'Missing: complete Windows 10/11 SDK headers, x64 libraries and resource compiler.' }
+            if ($Context.CheckOnly -or !$Context.InstallSystemPrerequisites) { throw 'Run System with -InstallSystemPrerequisites to install the missing C++ build components automatically.' }
+            Install-Vs2022BuildTools $Context
+            $msbuild = Get-BuildTools
+            $sdk = Get-WindowsSdk
+            $missing = @()
+            if (!$msbuild) { $missing += 'VS 2022 MSBuild/MSVC v143 x64' }
+            if (!$sdk) { $missing += 'complete Windows SDK (headers, x64 libraries and rc.exe)' }
+            if ($missing.Count) { throw "Microsoft installer returned success, but verification still cannot find: $($missing -join '; '). Check $env:TEMP\dd_*.log and this stage's stage.log. If Windows has a pending restart, restart and repeat System." }
         }
-        Write-Host "PASS: VS 2022 C++ tools and Windows SDK. MSBuild: $(Get-BuildTools)"
+        Write-Host "PASS: VS 2022 C++ tools. MSBuild: $msbuild"
+        Write-Host "PASS: Windows SDK $($sdk.Version). Location: $($sdk.Root)"
     }
     if ($Context.Device -eq 'cu126') {
         $smi = Get-Command nvidia-smi -ErrorAction SilentlyContinue
