@@ -1,13 +1,3 @@
-"""Simple SAM 3.1 processing for the two tree datasets.
-
-Use the documented SAM31 environment. Run with --dataset all or --limit 1.
-Paths are resolved from this repository, independent of the working directory. No model runs when this is imported.
-The Colab notebook imports these same functions to keep the comparison fair.
-
-Naming: functions use action-based camelCase; variables use camelCase;
-editable constants use UPPER_SNAKE_CASE. CSV/JSON fields retain their existing
-names so previous logs and new logs can still be compared.
-"""
 from contextlib import nullcontext
 import colorsys
 import csv
