@@ -39,44 +39,30 @@ needed; if a restart is requested, restart and repeat that stage. The installati
 
 ## 3. Generate SAM3.1 masks on Colab GPU (optional)
 
-For generating tree mask using SAM3.1 via GPU, follow this section. CPU segmentation commands are in Step 4.
+CPU users can continue to Step 4.
 
-Upload files below to **My Drive**; for simplicity, you could directly upload the whole repo AI-assisted-DBH-measurement pipeline:
+**Upload the whole project.** Open [Google Drive → My Drive](https://drive.google.com/drive/my-drive)
+using the same Google account as Colab. Name the uploaded
+folder **`AI-assisted-DBH-measurement-pipeline`**. Include the downloaded checkpoint
+at `model/SAM31/checkpoints/sam3.1_multiplex.pt`. Since the sam3.1_multiplex.pt is quite large, it might take around 1 hour to finish uploading the folder.
 
-```text
-My Drive/                              # /content/drive/MyDrive/
-└── AI-assisted-DBH-measurement/
-    ├── codes/segmentation/
-    │   ├── batchProcess_SAM31_GPU.ipynb
-    │   ├── batchProcess_SAM31_CPU.py
-    │   └── selectTargetTree_SAM31.py
-    ├── environment/python/sam31_gpu/
-    │   └── requirements.txt
-    ├── model/SAM31/
-    │   ├── source/                   
-    │   └── checkpoints/sam3.1_multiplex.pt
-    ├── data/
-    │   ├── rawdata/
-    │   │   ├── rgb_naturalField/     
-    │   │   └── rgb_plottedField/     
-    │   ├── basePoints_natural.csv
-    │   └── basePoints_plotted.csv
-    └── output/SAM3SegResults/         
-```
+**Run the notebook.** Open
+[batchProcess_SAM31_GPU.ipynb](codes/segmentation/batchProcess_SAM31_GPU.ipynb)
+in Colab, select a **GPU runtime**, and check these settings:
 
-The checkpoint in ./model/SAM31/checkpoints is excluded from GitHub; please download the checkpoint first as described in step1 and then upload it from your local copy.
-Then, you could generate masks on GPU by executing steps below in order:
-1. Open [batchProcess_SAM31_GPU.ipynb](codes/segmentation/batchProcess_SAM31_GPU.ipynb)
-   in Colab and select a **GPU runtime**.
-2. In the first cell, `PROJECT_ROOT` must point to
-   **`/content/drive/MyDrive/DBH-pipeline-whole-repo-clean`**. Run the mount and
-   installation cells. If NumPy changes, restart the session and rerun the mount cell.
-3. Set `DATASET` to `'natural'`, `'plotted'`, or `'all'`, and set
-   `LIMIT_PER_DATASET` to match `$MaxFiles`.
-4. Run every cell through the notebook.
+| Setting | Value |
+| --- | --- |
+| `PROJECT_ROOT` | `/content/drive/MyDrive/AI-assisted-DBH-measurement-pipeline` |
+| `DATASET` | `'natural'`, `'plotted'`, or `'all'` |
+| `LIMIT_PER_DATASET` | Match local `$MaxFiles`: `10`, or `0` for all images |
+| `GPU_PRECISION` | `'float32'` |
 
-**Bring results back to local computer:** copy the entire Drive `output/SAM3SegResults` folder
-to your local computer and replace the folder at `AI-assisted-DBH-measurement/output/SAM3SegResults`, then continue to Step 4.
+Choose **Runtime → Run all**. Allow Drive access when prompted. If installation
+requires a session restart, restart and choose **Run all** again.
+
+**Continue locally.** Download the entire Drive project's
+`output/SAM3SegResults/` folder into **`<local-project>/output/SAM3SegResults/`**,
+where `<local-project>` is the folder used for DBH calculation. Continue to Step 4.
 
 ## 4. Run the four pipelines locally
 
