@@ -114,7 +114,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.
 
 **SAM3.1 on CPU/GPU:** Run the CPU segmentation script (Section 4) or the Colab GPU notebook (Section 3). Per-image running times in seconds are automatically saved to `output/SAM3SegResults/reports/timings_<run_id>.csv`. 
 
-**MobileSAMv2 on iPhone:** Follow [the setup instructions](codes/runTimeTestingCodesForiPhone/README.md) to install the test app. Run **Batch all 487**, then select **Export latest CSV**.
+**MobileSAMv2 on iPhone:** Follow [the setup instructions](codes/runTimeTestingCodesForiPhone/README.md) to install the test app. Run "Batch all 487", then select "Export latest CSV".
 
 ## 5. Visualization and output locations
 
