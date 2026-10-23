@@ -110,6 +110,12 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\codes\DBH\run\Run-DBH.ps1 -Method MobileSAMv2 -Dataset plotted -MaxFiles $MaxFiles -SaveMasks
 ```
 
+## 5. Running Time Test
+
+**SAM3.1 on CPU/GPU:** Run the CPU segmentation script (Section 4) or the Colab GPU notebook (Section 3). Per-image running times in seconds are automatically saved to `output/SAM3SegResults/reports/timings_<run_id>.csv`. 
+
+**MobileSAMv2 on iPhone:** Follow [the setup instructions](codes/runTimeTestingCodesForiPhone/README.md) to install the test app. Run **Batch all 487**, then select **Export latest CSV**.
+
 ## 5. Visualization and output locations
 
 After four pipelines finish, open the notebook in the same PowerShell window:
