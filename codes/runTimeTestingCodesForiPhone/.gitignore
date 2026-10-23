@@ -1,0 +1,11 @@
+build/
+validation/
+__pycache__/
+*.pyc
+validation/csv-tests
+validation/sam-prompt-tests
+validation/sam-inference-timing-tests
+validation/csv-fixtures/
+**/xcuserdata/
+*.partial
+.DS_Store

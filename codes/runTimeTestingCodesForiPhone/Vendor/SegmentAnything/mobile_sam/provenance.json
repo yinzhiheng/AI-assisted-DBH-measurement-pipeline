@@ -1,0 +1,30 @@
+{
+  "source_repository": "https://github.com/yinzhiheng/AI-assisted-DBH-measurement-pipeline",
+  "source_commit": "fc6e3c0fcea7b4664a0747390c080c795d571078",
+  "source_directory": "model/MobileSAMv2/onnx",
+  "implementation": "MobileSAMv2 TinyViT + PromptGuidedDecoder; externally supplied prompts; no object finder",
+  "sha256": {
+    "mobile_sam.onnx": "318f77e3b0c100e9e070f04d1789a966a7f4ab8c74dc05f650e5a75e1b24f1f9",
+    "mobile_sam_preprocess.onnx": "62dd325618b7e49f0a5013059ebf3ee83ff82dafa81a7b83713b732692e15658"
+  },
+  "encoder_input": {
+    "name": "input",
+    "dtype": "uint8",
+    "shape": [
+      1,
+      3,
+      720,
+      1024
+    ],
+    "channels": "RGB planar; caller supplies BGR to Sam::preprocessImage"
+  },
+  "embedding_shape": [
+    1,
+    256,
+    64,
+    64
+  ],
+  "candidate_masks": 3,
+  "onnxruntime_test_version": "1.21.0",
+  "backup": "backup/before_mobilesamv2_2026-10-18"
+}

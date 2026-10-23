@@ -1,0 +1,117 @@
+[
+  {
+    "source": "ios/DBHMeasurer/cpp/BreastHeightLocalizer/BreastHeightLocalizer.cpp",
+    "copy": "Vendor/iForester/BreastHeightLocalizer/BreastHeightLocalizer.cpp",
+    "sha256": "01d9c39d652b6d97f7bc8fecde59e7c40dc4fb71f0264cba6679f991a4a30345"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/BreastHeightLocalizer/BreastHeightLocalizer.h",
+    "copy": "Vendor/iForester/BreastHeightLocalizer/BreastHeightLocalizer.h",
+    "sha256": "7a5ec8681246a6e1bc5c9ff2192375f8c32eefbc021b33771b874740e9e38b0d"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/CameraModel/CameraModel.cpp",
+    "copy": "Vendor/iForester/CameraModel/CameraModel.cpp",
+    "sha256": "c424f5379cde9e76e206e4c49e15e8a142e933fdd564b62e2fdfd11f2ee40603"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/CameraModel/CameraModel.h",
+    "copy": "Vendor/iForester/CameraModel/CameraModel.h",
+    "sha256": "856f3c1241d96ae34efdba2560d7899cd2b22e49a373076e421681157a16322e"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/DBHMeasurer/DBHMeasurer.cpp",
+    "copy": "Vendor/iForester/DBHMeasurer/DBHMeasurer.cpp",
+    "sha256": "b3baaee81a49c9b42d1113b56e9bdf4f3976ffafad8599b769d47fe8ba2e6b4d"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/DBHMeasurer/DBHMeasurer.h",
+    "copy": "Vendor/iForester/DBHMeasurer/DBHMeasurer.h",
+    "sha256": "bd9382e53c2a648d2230c9bcd72f55ba3b8d0db5b0fc1cca72071ceb594c6fba"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/DBHMeasurer/TrunkMaskRows.h",
+    "copy": "Vendor/iForester/DBHMeasurer/TrunkMaskRows.h",
+    "sha256": "96d3577613e3490891af5eaaf1210f666ce119d1bca0e06fda59b1d9acfbbbef"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/DepthFrame/DepthFrame.cpp",
+    "copy": "Vendor/iForester/DepthFrame/DepthFrame.cpp",
+    "sha256": "77e3fecc50285ed217f73e33736cc488927d5c64bfcfafd247c68c9f2a03d424"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/DepthFrame/DepthFrame.h",
+    "copy": "Vendor/iForester/DepthFrame/DepthFrame.h",
+    "sha256": "1b339663fda48b1fd85fcb16d7f2dc20cd6a3b46c2e1f36a2b81a97c39971675"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/Load/load.cpp",
+    "copy": "Vendor/iForester/Load/load.cpp",
+    "sha256": "dc68d1edd03224ed180e4a39bc241f71c84b575e74e5a873d6499841a3d0fd22"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/Load/load.h",
+    "copy": "Vendor/iForester/Load/load.h",
+    "sha256": "6bdff18664ffaed134c69716a2bd1d1ea46ee36e53d5233330537c49513062b8"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/configs/configs.cpp",
+    "copy": "Vendor/iForester/configs/configs.cpp",
+    "sha256": "bec286adb8fef1bdd99b9058c26c2ecac851ae3a5da6ddf337e5f677e4696b86"
+  },
+  {
+    "source": "ios/DBHMeasurer/cpp/configs/configs.h",
+    "copy": "Vendor/iForester/configs/configs.h",
+    "sha256": "2b7f95197a47e7f99f39af45a73993851b55f5ed212d4edd7a04df918c2199fb"
+  },
+  {
+    "source": "ios/SegmentAnything/license.rtf",
+    "copy": "Vendor/SegmentAnything/license.rtf",
+    "sha256": "af0bf061732501e2338efd56b3a93df2ba1c91edbd0d843ffc3334cf3d873e86"
+  },
+  {
+    "source": "ios/SegmentAnything/mobile_sam/MobileSAM-LICENSE.txt",
+    "copy": "Vendor/SegmentAnything/mobile_sam/MobileSAM-LICENSE.txt",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "source": "ios/SegmentAnything/mobile_sam/mobile_sam.onnx",
+    "copy": "Vendor/SegmentAnything/mobile_sam/mobile_sam.onnx",
+    "sha256": "318f77e3b0c100e9e070f04d1789a966a7f4ab8c74dc05f650e5a75e1b24f1f9"
+  },
+  {
+    "source": "ios/SegmentAnything/mobile_sam/mobile_sam_preprocess.onnx",
+    "copy": "Vendor/SegmentAnything/mobile_sam/mobile_sam_preprocess.onnx",
+    "sha256": "62dd325618b7e49f0a5013059ebf3ee83ff82dafa81a7b83713b732692e15658"
+  },
+  {
+    "source": "ios/SegmentAnything/mobile_sam/provenance.json",
+    "copy": "Vendor/SegmentAnything/mobile_sam/provenance.json",
+    "sha256": "5eee9bdbf03bd9cec807f6f402374f918d4770bf31071c0cd13e3aeb948fced9"
+  },
+  {
+    "source": "ios/SegmentAnything/sam.cpp",
+    "copy": "Vendor/SegmentAnything/sam.cpp",
+    "sha256": "ec2a723fea7da31152aa4c75306c04e4a3f5cc17306562326848ac6d21a74c33"
+  },
+  {
+    "source": "ios/SegmentAnything/sam.hpp",
+    "copy": "Vendor/SegmentAnything/sam.hpp",
+    "sha256": "b1d0f0f6f4aaa88390eb270acba532c23e4126c900e9987641d586061188b919"
+  },
+  {
+    "source": "ios/SegmentAnything/sam_prompts.hpp",
+    "copy": "Vendor/SegmentAnything/sam_prompts.hpp",
+    "sha256": "74d44c5d86e3720aa02f9eb3caa11b4177cb783cbc4ef3262ed500d7d6c459c8"
+  },
+  {
+    "source": "ios/opencv2.framework/Versions/A/opencv2",
+    "copy": "Vendor/opencv2.framework/Versions/A/opencv2",
+    "sha256": "7191b276480e8d8ab52014ff80a9d88097e2be11cb7bc4973057e5086aea44e8"
+  },
+  {
+    "source": "ios/Pods/onnxruntime-c/onnxruntime.xcframework/ios-arm64/onnxruntime.framework/onnxruntime",
+    "copy": "Vendor/onnxruntime.framework/onnxruntime",
+    "sha256": "953b619f5569fed1c7d93202fa54392d7d4aecfa9e07c549d30aeb4280ab2a6a"
+  }
+]

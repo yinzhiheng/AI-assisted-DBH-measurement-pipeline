@@ -1,0 +1,4 @@
+# Preserve the exact dataset, framework, model and source-provenance bytes.
+* -text
+# This original iOS static library exceeds GitHub's regular Git file limit.
+Vendor/opencv2.framework/Versions/A/opencv2 filter=lfs diff=lfs merge=lfs -text

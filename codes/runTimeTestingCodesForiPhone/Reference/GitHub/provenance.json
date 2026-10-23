@@ -1,0 +1,36 @@
+{
+  "repository": "https://github.com/yinzhiheng/AI-assisted-DBH-measurement-pipeline",
+  "commit": "fc6e3c0fcea7b4664a0747390c080c795d571078",
+  "files": [
+    {
+      "path": "codes/DBH/src/BreastHeightLocalizer/BreastHeightLocalizer.cpp",
+      "copy": "Reference/GitHub/BreastHeightLocalizer.cpp",
+      "git_blob_sha1": "e3597434543e7104790b4e6869f395cf919349a3",
+      "sha256": "3fb2c2fea986f0ee5e994207e9bb6f7282606280daab01dc79b591ddfe59287f"
+    },
+    {
+      "path": "codes/DBH/src/BreastHeightLocalizer/BreastHeightLocalizer.h",
+      "copy": "Reference/GitHub/BreastHeightLocalizer.h",
+      "git_blob_sha1": "904b543524cad013ab4f2e07da070599699123ab",
+      "sha256": "48de8ae36b15c9077f2d570abc5cf9e2a34c884025d1709e62d4ee0a0c15816b"
+    },
+    {
+      "path": "codes/DBH/src/DBHMeasurer/DBHMeasurer.cpp",
+      "copy": "Reference/GitHub/DBHMeasurer.cpp",
+      "git_blob_sha1": "e86c07cef2615fe98970685e35af0d2d29b49688",
+      "sha256": "d3609f92a86424aa8354adb4021320d9dc6145fa82965601634b1e46d242531c"
+    },
+    {
+      "path": "codes/DBH/src/configs/configs.h",
+      "copy": "Reference/GitHub/configs.h",
+      "git_blob_sha1": "f5eec8b89568d7c3cbc2beb1fe7f02754e9ae9c4",
+      "sha256": "492d4e77e261d3d606c61cae1afedc07e140a05c552d2613127edd726559efc8"
+    },
+    {
+      "path": "codes/DBH/batchProcessing/batchProcessNaturalDatasetByMobileSAMv2.cpp",
+      "copy": "Reference/GitHub/batchProcessNaturalDatasetByMobileSAMv2.cpp",
+      "git_blob_sha1": "65a1a06bcad4e9eac4b3bea42dfb03c4480dba54",
+      "sha256": "2594e1513dc054eaf75b884e3f1d4465221fa99aeee63540082aeb61d5ad941d"
+    }
+  ]
+}

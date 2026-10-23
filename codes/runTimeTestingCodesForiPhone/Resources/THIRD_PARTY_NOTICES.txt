@@ -1,0 +1,13 @@
+MobileSAMv2 models and C++ inference adapter: copied from the local iForester
+project. See the bundled MobileSAM-LICENSE.txt and Vendor/SegmentAnything/license.rtf.
+Model provenance: Vendor/SegmentAnything/mobile_sam/provenance.json.
+
+ONNX Runtime 1.21.0: copied from iForester's installed onnxruntime-c CocoaPod.
+Copyright Microsoft Corporation. MIT License; see Vendor/ONNXRuntime-LICENSE.
+
+OpenCV: exact static iOS framework from the local iForester project.
+See Vendor/OpenCV-LICENSE and the framework headers for component notices.
+
+Dataset: https://github.com/yinzhiheng/AI-assisted-DBH-measurement-pipeline
+Revision: fc6e3c0fcea7b4664a0747390c080c795d571078
+The original base-point/label CSVs and RGB/depth files are retained in Dataset.
